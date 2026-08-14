@@ -78,7 +78,7 @@ server.log
 /.zscripts/
 /custom.db
 /custom.db-journal
-/db/screenshots/
-three_roads_options.json
-*.json
-mini-services/
+/db/
+/mini-services/
+/screenshot_check.json
+
