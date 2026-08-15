@@ -1,0 +1,108 @@
+{
+  "run_timestamp": "2026-08-15T09:43:07.870264",
+  "queries": [
+    "site:linkedin.com/jobs React front-end developer healthcare Egypt remote",
+    "site:upwork.com React UI/UX designer e-commerce freelance",
+    "site:wuzzuf.net React front-end developer Egypt"
+  ],
+  "candidates_fetched": 15,
+  "candidates_read": 8,
+  "candidates_qualified": 2,
+  "threshold": 5,
+  "entries": [
+    {
+      "url": "https://www.linkedin.com/jobs/view/senior-front-end-developer-at-acoer-4280184055",
+      "title": "Acoer hiring Senior Front-End Developer in Egypt",
+      "source": "LinkedIn Jobs",
+      "score_total": 5,
+      "rationale": "This role requires a 'Senior Front-End / UI Developer' with 'very strong technical foundation' and ideally 'healthcare' experience.",
+      "red_flags": [
+        "too senior",
+        "prefers US/EU time zones",
+        "visa sponsorship concern (The Dalles, OR)"
+      ],
+      "fetched_at": "2026-08-15T09:42:54.250463"
+    },
+    {
+      "url": "https://www.linkedin.com/jobs/view/4404592170",
+      "title": "Senior Frontend Engineer - React / React Native (Web &",
+      "source": "LinkedIn Jobs",
+      "score_total": 4,
+      "rationale": "\"Valleysoft is looking for a Senior Frontend Engineer experienced in both React and React Native\"",
+      "red_flags": [
+        "too senior",
+        "visa issue (on-site OR)"
+      ],
+      "fetched_at": "2026-08-15T09:42:56.051539"
+    },
+    {
+      "url": "https://www.linkedin.com/jobs/view/4334134593",
+      "title": "Flatgigs hiring Mobile Developer- React in Egypt",
+      "source": "LinkedIn Jobs",
+      "score_total": 4,
+      "rationale": "Mobile Developer- React in Egypt requires React skills but is located in The Dalles, OR.",
+      "red_flags": [
+        "visa issue",
+        "location mismatch"
+      ],
+      "fetched_at": "2026-08-15T09:42:57.800207"
+    },
+    {
+      "url": "https://www.linkedin.com/jobs/search/?currentJobId=3417204619&distance=25&f_TPR=r604800&geoId=106155005&keywords=frontend%20developer",
+      "title": "16 Frontend Developer jobs in Egypt",
+      "source": "LinkedIn Jobs",
+      "score_total": 0,
+      "rationale": "No specific job details provided in the description.",
+      "red_flags": [
+        "low-signal",
+        "thin JD"
+      ],
+      "fetched_at": "2026-08-15T09:42:59.446521"
+    },
+    {
+      "url": "https://www.linkedin.com/jobs/view/frontend-developer-at-halian-managed-services-recruitment-agency-contract-staffing-4319329198",
+      "title": "Frontend Developer - Halian",
+      "source": "LinkedIn Jobs",
+      "score_total": 6,
+      "rationale": "Develop and maintain responsive web and mobile applications using React JS and React Native.",
+      "red_flags": [],
+      "fetched_at": "2026-08-15T09:43:00.929715"
+    },
+    {
+      "url": "https://www.upwork.com/hire/ui-designers",
+      "title": "Best Freelance UI Designers for Hire (Aug 2026)",
+      "source": "Upwork",
+      "score_total": 0,
+      "rationale": "The job description is completely inaccessible due to a verification page.",
+      "red_flags": [
+        "low-signal",
+        "inaccessible"
+      ],
+      "fetched_at": "2026-08-15T09:43:02.448218"
+    },
+    {
+      "url": "https://www.upwork.com/freelance-jobs/apply/Designer-for-ECommerce_~022080018821097494873",
+      "title": "UI/UX Designer for ECommerce - Freelance Job in Web &",
+      "source": "Upwork",
+      "score_total": 0,
+      "rationale": "Unable to evaluate job description due to Cloudflare verification page.",
+      "red_flags": [
+        "low-signal",
+        "inaccessible-content"
+      ],
+      "fetched_at": "2026-08-15T09:43:04.137815"
+    },
+    {
+      "url": "https://www.upwork.com/resources/how-to-find-work-ux-design-freelancer",
+      "title": "How to Find Work as a UX Design Freelancer",
+      "source": "Upwork",
+      "score_total": 0,
+      "rationale": "This is not a job posting but rather an article about freelancing on Upwork.",
+      "red_flags": [
+        "not-a-job",
+        "low-signal"
+      ],
+      "fetched_at": "2026-08-15T09:43:05.790806"
+    }
+  ]
+}
