@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# z-ai CLI temp files
+/tmp/_scout_*.json
+
+# Environment
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Run artifacts (regenerated each run — don't commit)
+run_capture.txt
+audit_log.json
+run_output.txt

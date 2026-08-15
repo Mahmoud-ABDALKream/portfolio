@@ -241,9 +241,20 @@ Score this job. Return ONLY the JSON object."""
             log(f'  [{i}/{len(top_candidates)}] SCORE PARSE ERROR: {e}')
 
         if score_json:
+            # ── Seniority penalty (bug fix, see eval E3) ──
+            # If LLM flagged "too senior" in red_flags, deduct 2 points.
+            # This prevents senior roles from passing threshold on skill/domain alone.
+            red_flags = score_json.get('red_flags', [])
+            raw_total = score_json.get('total', 0)
+            penalty = 0
+            if any('too senior' in str(f).lower() for f in red_flags):
+                penalty = 2
+                score_json['total'] = max(0, raw_total - penalty)
+                score_json['penalty_applied'] = f'-2 (too senior; raw was {raw_total})'
             c['score'] = score_json
             total = score_json.get('total', 0)
-            log(f'  [{i}/{len(top_candidates)}] score: {total}/9 — {score_json.get("rationale", "")[:70]}')
+            penalty_note = f' [penalty: -{penalty}]' if penalty else ''
+            log(f'  [{i}/{len(top_candidates)}] score: {total}/9{penalty_note} — {score_json.get("rationale", "")[:70]}')
         else:
             c['score'] = {'total': 0, 'rationale': 'parse error', 'red_flags': ['scoring_failed']}
             log(f'  [{i}/{len(top_candidates)}] score: FAILED')
