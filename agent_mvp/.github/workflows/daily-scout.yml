@@ -27,16 +27,21 @@ jobs:
       - name: Run Research Scout
         env:
           ZAI_API_KEY: ${{ secrets.ZAI_API_KEY }}
+          SCOUT_DIR: ${{ github.workspace }}/agent_mvp
+          SCOUT_EMAIL_WEBHOOK: ${{ secrets.SCOUT_EMAIL_WEBHOOK }}
         run: |
           cd agent_mvp
           python3 scout.py 2>&1 | tee run_output.txt
+          echo "--- EXIT CODE: $? ---"
 
       - name: Upload run capture
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: scout-run-${{ github.run_id }}
-          path: agent_mvp/run_output.txt
+          path: |
+            agent_mvp/run_output.txt
+            agent_mvp/run_capture.txt
           retention-days: 30
 
       - name: Upload audit log
@@ -46,3 +51,30 @@ jobs:
           name: audit-log-${{ github.run_id }}
           path: agent_mvp/audit_log.json
           retention-days: 30
+
+      - name: Upload daily digest (email-ready)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: digest-${{ github.run_id }}
+          path: agent_mvp/digest_email.txt
+          retention-days: 30
+
+      - name: Upload history log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: history-${{ github.run_id }}
+          path: agent_mvp/history.jsonl
+          retention-days: 90
+
+      - name: Print digest to job summary
+        if: always()
+        run: |
+          echo "## Research Scout Daily Digest" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ -f agent_mvp/digest_email.txt ]; then
+            cat agent_mvp/digest_email.txt >> $GITHUB_STEP_SUMMARY
+          else
+            echo "_(No digest produced — check logs)_" >> $GITHUB_STEP_SUMMARY
+          fi

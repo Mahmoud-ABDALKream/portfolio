@@ -26,3 +26,5 @@ Thumbs.db
 run_capture.txt
 audit_log.json
 run_output.txt
+digest_email.txt
+history.jsonl

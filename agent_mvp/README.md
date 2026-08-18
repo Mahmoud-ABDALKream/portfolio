@@ -61,14 +61,24 @@ Each job is scored on 4 criteria (total /9):
 
 ```
 agent_mvp/
-├── scout.py              # The agent (5-step workflow)
+├── scout.py              # The agent (5-step workflow + history + email output)
 ├── test_eval_e3.py       # E3 eval: seniority penalty test
 ├── audit_log.json        # Per-run audit trail (all fetched URLs + scores)
 ├── run_capture.txt       # Raw terminal output of last run
-├── TRACKING.md           # 7-day tracking template
+├── history.jsonl         # Append-only daily archive (one JSON entry per run)
+├── digest_email.txt      # Email-ready digest (RFC 822 format, paste into email client)
+├── TRACKING.md           # 7-day tracking template (Day 1 filled in)
 └── .github/workflows/
     └── daily-scout.yml   # GitHub Actions cron (9 AM EET daily)
 ```
+
+## Enhancements (beyond base MVP)
+
+- **Daily history log** — each run appends to `history.jsonl` (JSON Lines format). One entry per run with timestamp, candidate counts, qualified roles, and full digest. Queryable with `jq` or any JSONL tool.
+- **Email-ready digest** — `digest_email.txt` is RFC 822 formatted (Subject, To, From, Date headers + body). Paste into any email client, or pipe to `sendmail` / `msmtp` / Formspree webhook.
+- **Optional webhook delivery** — set `SCOUT_EMAIL_WEBHOOK` env var to a URL (e.g. Formspree, Zapier, n8n) and the agent POSTs the digest as JSON on each run.
+- **Environment-variable config** — `SCOUT_DIR` overrides the output directory (useful for GitHub Actions runners). `SCOUT_EMAIL_WEBHOOK` enables webhook delivery.
+- **Exit codes** — `0` = success with qualified roles, `1` = success but no roles qualified, `2` = tool failure. Lets cron workflows detect failure without parsing logs.
 
 ## Daily Automation (GitHub Actions)
 
