@@ -4,108 +4,112 @@ import Link from "next/link";
 export default function MedoniqCase() {
   return (
     <div style={{ background: "#0a1628" }}>
-      {/* Hero */}
+      {/* Hero — split layout: text left, app screenshot right (the work is the star) */}
       <section
         style={{
           position: "relative",
-          padding: "5rem 1.5rem 4rem",
+          padding: "3rem 1.5rem 2.5rem",
           overflow: "hidden",
+          background: "#0a1628",
         }}
       >
         <div
           style={{
-            position: "absolute",
-            inset: 0,
-            zIndex: 0,
-            opacity: 0.25,
-          }}
-        >
-          <Image
-            src="/images/hero_A_keeper.png"
-            alt=""
-            fill
-            style={{ objectFit: "cover" }}
-            priority
-          />
-        </div>
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            zIndex: 1,
-            background:
-              "linear-gradient(180deg, rgba(10,22,40,0.7) 0%, rgba(10,22,40,0.9) 70%, #0a1628 100%)",
-          }}
-        />
-        <div
-          style={{
             position: "relative",
             zIndex: 2,
-            maxWidth: "900px",
+            maxWidth: "1200px",
             margin: "0 auto",
+            display: "grid",
+            gridTemplateColumns: "minmax(0, 1fr) minmax(0, 1fr)",
+            gap: "3rem",
+            alignItems: "center",
           }}
         >
-          <div
-            style={{
-              display: "inline-block",
-              padding: "0.4rem 0.9rem",
-              background: "rgba(77, 168, 218, 0.15)",
-              border: "1px solid #4da8da",
-              borderRadius: "999px",
-              fontSize: "0.78rem",
-              color: "#4da8da",
-              fontWeight: 600,
-              letterSpacing: "0.1em",
-              marginBottom: "1.5rem",
-            }}
-          >
-            🏆 iSchool 1st Place + Promising Startup Award 2025
+          {/* Left: text */}
+          <div>
+            <div
+              style={{
+                display: "inline-block",
+                padding: "0.35rem 0.8rem",
+                background: "rgba(77, 168, 218, 0.12)",
+                border: "1px solid rgba(77, 168, 218, 0.5)",
+                borderRadius: "999px",
+                fontSize: "0.72rem",
+                color: "#4da8da",
+                fontWeight: 600,
+                letterSpacing: "0.08em",
+                marginBottom: "1.25rem",
+              }}
+            >
+              iSchool 1st Place + Promising Startup Award 2025
+            </div>
+            <h1
+              style={{
+                fontSize: "clamp(1.75rem, 4vw, 2.75rem)",
+                fontWeight: 800,
+                lineHeight: 1.15,
+                marginBottom: "1rem",
+                color: "#e8f0f8",
+              }}
+            >
+              Medoniq — Digital Healthcare Platform
+            </h1>
+            <p
+              style={{
+                fontSize: "1.02rem",
+                color: "#a0bcd4",
+                lineHeight: 1.55,
+                maxWidth: "480px",
+                marginBottom: "1.25rem",
+              }}
+            >
+              A full-stack web + mobile platform for family-centered healthcare
+              management — medication tracking, secure health records, and
+              direct doctor connectivity.
+            </p>
+            <div
+              style={{
+                display: "flex",
+                gap: "1.5rem",
+                flexWrap: "wrap",
+                fontSize: "0.85rem",
+                color: "#a0bcd4",
+              }}
+            >
+              <span>
+                <strong style={{ color: "#e8f0f8", fontWeight: 600 }}>Role:</strong>{" "}
+                Co-Founder, UI/UX Designer, Front-End Dev
+              </span>
+              <span>
+                <strong style={{ color: "#e8f0f8", fontWeight: 600 }}>Year:</strong> 2025
+              </span>
+              <span>
+                <strong style={{ color: "#e8f0f8", fontWeight: 600 }}>Stack:</strong>{" "}
+                React, Node.js, Figma
+              </span>
+            </div>
           </div>
-          <h1
-            style={{
-              fontSize: "clamp(2.25rem, 6vw, 3.75rem)",
-              fontWeight: 900,
-              lineHeight: 1.1,
-              marginBottom: "1.25rem",
-            }}
-          >
-            Medoniq
-            <br />
-            <span style={{ color: "#4da8da" }}>Digital Healthcare Platform</span>
-          </h1>
-          <p
-            style={{
-              fontSize: "1.15rem",
-              color: "#e8f0f8",
-              lineHeight: 1.5,
-              maxWidth: "700px",
-              marginBottom: "1.5rem",
-            }}
-          >
-            A full-stack web + mobile platform for family-centered healthcare
-            management — medication tracking, secure health records, and
-            direct doctor connectivity.
-          </p>
+          {/* Right: the app screenshot — this is the proof, the star */}
           <div
             style={{
-              display: "flex",
-              gap: "2rem",
-              flexWrap: "wrap",
-              fontSize: "0.9rem",
-              color: "#7a9bb8",
+              position: "relative",
+              width: "100%",
+              aspectRatio: "4 / 3",
+              borderRadius: "10px",
+              overflow: "hidden",
+              border: "1px solid rgba(77, 168, 218, 0.25)",
+              background: "#142840",
+              boxShadow: "0 20px 60px rgba(0, 0, 0, 0.4)",
             }}
           >
-            <span>
-              <strong style={{ color: "#e8f0f8" }}>Role:</strong> Co-Founder,
-              UI/UX Designer, Front-End Dev
-            </span>
-            <span>
-              <strong style={{ color: "#e8f0f8" }}>Year:</strong> 2025
-            </span>
-            <span>
-              <strong style={{ color: "#e8f0f8" }}>Stack:</strong> React,
-              Node.js, Figma
-            </span>
+            <Image
+              src="/images/Medoniq app.png"
+              alt="Medoniq mobile app UI — multiple screens showing medication tracking, doctor profiles, health analytics"
+              fill
+              style={{ objectFit: "cover" }}
+              priority
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
           </div>
         </div>
       </section>

@@ -9,17 +9,17 @@ export default function Home() {
       <section
         style={{
           position: "relative",
-          padding: "5rem 1.5rem 4rem",
+          padding: "3.5rem 1.5rem 2rem",
           overflow: "hidden",
         }}
       >
-        {/* Background hero texture (AI tissue keeper from W3) */}
+        {/* Background hero texture (AI tissue keeper from W3) — reduced opacity so it recedes */}
         <div
           style={{
             position: "absolute",
             inset: 0,
             zIndex: 0,
-            opacity: 0.35,
+            opacity: 0.18,
           }}
         >
           <Image
@@ -37,38 +37,37 @@ export default function Home() {
             inset: 0,
             zIndex: 1,
             background:
-              "linear-gradient(180deg, rgba(10,22,40,0.6) 0%, rgba(10,22,40,0.85) 60%, #0a1628 100%)",
+              "linear-gradient(180deg, rgba(10,22,40,0.7) 0%, rgba(10,22,40,0.92) 70%, #0a1628 100%)",
           }}
         />
         <div
           style={{
             position: "relative",
             zIndex: 2,
-            maxWidth: "900px",
+            maxWidth: "820px",
             margin: "0 auto",
             textAlign: "center",
           }}
         >
           <p
             style={{
-              fontSize: "0.78rem",
+              fontSize: "0.72rem",
               color: "#4da8da",
-              letterSpacing: "0.35em",
+              letterSpacing: "0.25em",
               textTransform: "uppercase",
-              fontWeight: 300,
-              marginBottom: "1.5rem",
+              fontWeight: 500,
+              marginBottom: "1rem",
             }}
           >
             Available for freelance &amp; full-time work
           </p>
           <h1
             style={{
-              fontSize: "clamp(2.5rem, 7vw, 4.5rem)",
-              fontWeight: 900,
-              lineHeight: 1.05,
-              letterSpacing: "-0.02em",
-              marginBottom: "1.5rem",
-              textShadow: "0 0 40px rgba(77,168,218,0.2)",
+              fontSize: "clamp(2rem, 5.5vw, 3.5rem)",
+              fontWeight: 800,
+              lineHeight: 1.1,
+              letterSpacing: "-0.015em",
+              marginBottom: "1.25rem",
             }}
           >
             Mahmoud
@@ -91,9 +90,9 @@ export default function Home() {
           <p
             style={{
               fontSize: "1rem",
-              color: "#7a9bb8",
-              marginBottom: "2.5rem",
-              fontWeight: 300,
+              color: "#a0bcd4",
+              marginBottom: "1.5rem",
+              fontWeight: 400,
             }}
           >
             Front-End Developer &amp; Product Designer · Alexandria, Egypt
@@ -147,23 +146,23 @@ export default function Home() {
         style={{
           maxWidth: "1200px",
           margin: "0 auto",
-          padding: "4rem 1.5rem",
+          padding: "2.5rem 1.5rem 3rem",
         }}
       >
         <h2
           style={{
-            fontSize: "1.75rem",
+            fontSize: "1.5rem",
             fontWeight: 700,
-            marginBottom: "0.5rem",
+            marginBottom: "0.4rem",
           }}
         >
           Featured Work
         </h2>
         <p
           style={{
-            fontSize: "0.95rem",
-            color: "#7a9bb8",
-            marginBottom: "2.5rem",
+            fontSize: "0.92rem",
+            color: "#a0bcd4",
+            marginBottom: "1.75rem",
           }}
         >
           A curated selection of UI/UX design and web development work.
