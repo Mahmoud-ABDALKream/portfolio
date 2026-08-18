@@ -250,16 +250,51 @@ Score this job. Return ONLY the JSON object."""
             log(f'  [{i}/{len(top_candidates)}] SCORE PARSE ERROR: {e}')
 
         if score_json:
-            # ── Seniority penalty (bug fix, see eval E3) ──
-            # If LLM flagged "too senior" in red_flags, deduct 2 points.
-            # This prevents senior roles from passing threshold on skill/domain alone.
-            red_flags = score_json.get('red_flags', [])
+            # ── Seniority penalty (enhanced, see eval E3) ──
+            # Multi-signal detection: checks red_flags + JD text + title for seniority markers.
+            # Penalty tiers: -2 for "senior" keyword, -3 for "senior + 8+ years", -4 for "lead/principal".
+            red_flags = [str(f).lower() for f in score_json.get('red_flags', [])]
+            jd_text_lower = (c.get('full_text', '') or c.get('snippet', '')).lower()[:2000]
+            title_lower = c.get('title', '').lower()
             raw_total = score_json.get('total', 0)
             penalty = 0
-            if any('too senior' in str(f).lower() for f in red_flags):
-                penalty = 2
+            penalty_reason = ''
+
+            # Signal 1: LLM flagged "too senior" in red_flags
+            if any('too senior' in f for f in red_flags):
+                penalty += 2
+                penalty_reason += 'too senior (LLM flag); '
+
+            # Signal 2: Title or JD contains "senior" (case-insensitive)
+            senior_in_title = 'senior' in title_lower
+            senior_in_jd = 'senior' in jd_text_lower[:500]
+            if senior_in_title or senior_in_jd:
+                if not penalty:  # don't double-count if LLM already flagged
+                    penalty += 2
+                    penalty_reason += 'senior keyword in JD/title; '
+
+            # Signal 3: Years required > 5 (extract from JD text)
+            import re
+            years_match = re.search(r'(\d+)\+?\s*(?:years|yrs)\s*(?:of\s*)?(?:experience|exp)', jd_text_lower)
+            if years_match:
+                years_req = int(years_match.group(1))
+                if years_req >= 6:
+                    penalty += 1
+                    penalty_reason += f'{years_req}+ years required; '
+                elif years_req >= 4:
+                    penalty_reason += f'{years_req}+ years (stretch, no penalty); '
+
+            # Signal 4: Lead/Principal/Staff (auto-reject tier)
+            lead_keywords = ['lead ', 'principal', 'staff ', 'head of']
+            if any(kw in title_lower for kw in lead_keywords):
+                penalty += 2
+                penalty_reason += 'lead/principal title; '
+
+            # Apply penalty (cap at -4 so a perfect 9 doesn't go below 5)
+            penalty = min(penalty, 4)
+            if penalty:
                 score_json['total'] = max(0, raw_total - penalty)
-                score_json['penalty_applied'] = f'-2 (too senior; raw was {raw_total})'
+                score_json['penalty_applied'] = f'-{penalty} ({penalty_reason.strip("; ")}; raw was {raw_total})'
             c['score'] = score_json
             total = score_json.get('total', 0)
             penalty_note = f' [penalty: -{penalty}]' if penalty else ''

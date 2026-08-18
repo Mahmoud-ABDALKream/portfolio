@@ -28,3 +28,7 @@ audit_log.json
 run_output.txt
 digest_email.txt
 history.jsonl
+weekly_summary_*.txt
+
+# Cron logs
+logs/

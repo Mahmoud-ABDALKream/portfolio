@@ -61,13 +61,16 @@ Each job is scored on 4 criteria (total /9):
 
 ```
 agent_mvp/
-├── scout.py              # The agent (5-step workflow + history + email output)
-├── test_eval_e3.py       # E3 eval: seniority penalty test
+├── scout.py              # The agent (5-step workflow + history + email + enhanced seniority filter)
+├── test_eval_e3.py       # E3 eval: enhanced seniority penalty (6 tests)
+├── weekly_summary.py     # Parses history.jsonl → 7-day summary report
+├── cron_trigger.sh       # External cron wrapper (for cron-job.org / local cron)
 ├── audit_log.json        # Per-run audit trail (all fetched URLs + scores)
 ├── run_capture.txt       # Raw terminal output of last run
 ├── history.jsonl         # Append-only daily archive (one JSON entry per run)
-├── digest_email.txt      # Email-ready digest (RFC 822 format, paste into email client)
+├── digest_email.txt      # Email-ready digest (RFC 822 format)
 ├── TRACKING.md           # 7-day tracking template (Day 1 filled in)
+├── CRON_SETUP.md         # Guide: 3 ways to set up daily automation
 └── .github/workflows/
     └── daily-scout.yml   # GitHub Actions cron (9 AM EET daily)
 ```
@@ -79,6 +82,9 @@ agent_mvp/
 - **Optional webhook delivery** — set `SCOUT_EMAIL_WEBHOOK` env var to a URL (e.g. Formspree, Zapier, n8n) and the agent POSTs the digest as JSON on each run.
 - **Environment-variable config** — `SCOUT_DIR` overrides the output directory (useful for GitHub Actions runners). `SCOUT_EMAIL_WEBHOOK` enables webhook delivery.
 - **Exit codes** — `0` = success with qualified roles, `1` = success but no roles qualified, `2` = tool failure. Lets cron workflows detect failure without parsing logs.
+- **Enhanced seniority filter** — multi-signal detection: LLM "too senior" flag + "senior" keyword in title/JD + 6+ years required + lead/principal/staff title. Penalty cap at -4 (perfect 9 stays at 5). See `test_eval_e3.py` (6 tests).
+- **Weekly summary** — `weekly_summary.py` parses `history.jsonl` and produces a 7-day report with aggregate stats, per-day breakdown, top roles by score, source distribution, score distribution histogram, and goal check.
+- **External cron wrapper** — `cron_trigger.sh` handles dated logging, exit code propagation, old log cleanup. Works with cron-job.org, GitHub Actions, or local cron.
 
 ## Daily Automation (GitHub Actions)
 
