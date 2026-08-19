@@ -1,0 +1,22 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "Great questions! Let's break down these Next.js concepts in a way that makes sense.\n\n### 1. Server Component vs Client Component\n\nThink of your Next.js app like a restaurant:\n\n- **Server Components** are like the kitchen staff preparing meals before customers arrive. They work on the \"server\" (the kitchen), away from the customers. They can access databases, read files, and do other heavy lifting without the customers seeing. The finished dishes (HTML) are served to customers.\n\n- **Client Components** are like the waiters at your table. They interact directly with the customers (the browser), respond to requests (clicks, hovers), and can update what the customer sees in real-time.\n\nIn Next.js:\n- Server Components are the default - they don't need any special marking.\n- Client Components must start with `'use client'` at the top.\n\n### 2. Why can't Server Components have event handlers?\n\nThis goes back to our restaurant analogy:\n\nServer Components (kitchen staff) prepare the initial meal, but once it's served to the customer (browser), the kitchen staff can't directly interact with the customer. They can't see when a customer hovers over a menu item or clicks a button.\n\nEvent handlers like `onMouseEnter` require real-time interaction with the user, which only happens in the browser (client-side). Since Server Components render on the server before being sent to the browser, they can't attach these interactive behaviors.\n\n### 3. What does 'use client' actually do?\n\nAdding `'use client'` to the top of a file is like putting a \"Waiter Needed\" sign on a restaurant table. It tells Next.js:\n\n\"This component will need to interact with customers (the browser), respond to their actions, and possibly change what they see in real-time. Please send the necessary JavaScript code to the browser so it can work there.\"\n\nWithout `'use client'`, Next.js assumes it's a Server Component that can just render static HTML on the server.\n\n### 4. Why did splitting into a separate file fix the error?\n\nWhen you put `'use client'` in your `interactive.tsx` file and moved your `HoverLink` component there, you were essentially:\n\n1. Creating a \"Waiter\" (Client Component) specifically for handling interactions\n2. Keeping your main page as \"Kitchen Staff\" (Server Component) that just prepares the initial layout\n\nThis separation works because:\n- Your page.tsx can render the Server Component and include the Client Component\n- The Client Component gets the necessary JavaScript to run in the browser\n- The Server Component doesn't try to do anything browser-specific\n\nIt's like having the kitchen prepare the table setting (page.tsx) and then having a waiter (interactive.tsx) handle all the customer interactions at that table.\n\n### 5. How do I know when something needs to be a Client Component vs. Server Component?\n\nAsk yourself these questions:\n\n**Use a Client Component when:**\n- You need event handlers (onClick, onMouseEnter, etc.)\n- You need to use browser-only APIs (window, document, localStorage)\n- You need state that changes over time (useState, useEffect)\n- You need to respond to user input in real-time\n\n**Use a Server Component when:**\n- You're just displaying data that doesn't change\n- You need to access databases or files directly\n- You want to reduce the JavaScript sent to the browser\n- You're doing heavy computations that don't need browser interaction\n\n**A good rule of thumb:** Start with Server Components (they're the default), and only make something a Client Component when you specifically need browser interactivity. The fewer Client Components you use, the faster your app will load.\n\nDoes this help clarify things? Feel free to ask if any part needs more explanation!",
+        "role": "assistant"
+      }
+    }
+  ],
+  "created": 1787146201,
+  "id": "202608192129480f52c0f7c6894877",
+  "model": "glm-4-plus",
+  "object": "chat.completion",
+  "request_id": "202608192129480f52c0f7c6894877",
+  "usage": {
+    "completion_tokens": 781,
+    "prompt_tokens": 232,
+    "total_tokens": 1013
+  }
+}
