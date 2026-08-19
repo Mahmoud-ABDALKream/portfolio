@@ -5,13 +5,36 @@ import { useState } from "react";
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
+  const [response, setResponse] = useState<any>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Per the W4 "Three Roads" decision: no backend yet.
-    // This is a client-side confirmation only — the form does not persist.
-    // To wire up: route to a Vercel serverless function or Formspree.
-    setSubmitted(true);
+    setSubmitting(true);
+    setError("");
+
+    try {
+      // POST the form data to the API route
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      const data = await res.json();
+
+      if (data.ok) {
+        setSubmitted(true);
+        setResponse(data);
+      } else {
+        setError(data.error || "Something went wrong. Please try again.");
+      }
+    } catch (err) {
+      setError("Network error. Please check your connection and try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -267,24 +290,36 @@ export default function Contact() {
                   marginBottom: "0.75rem",
                 }}
               >
-                ✓ Message captured
+                ✓ Message received
               </p>
               <p
                 style={{
                   fontSize: "0.95rem",
                   color: "#7a9bb8",
                   lineHeight: 1.6,
-                  marginBottom: "1.5rem",
+                  marginBottom: "1rem",
                 }}
               >
-                This is a client-side demo. To actually send, email me
-                directly at mahmoudabdelkreambusiness@gmail.com — or wire this
-                form to a Vercel serverless function (planned for next iteration).
+                Your message was submitted successfully. I&apos;ll get back to you
+                at <strong style={{ color: "#e8f0f8" }}>{response?.submission?.email}</strong> within 24 hours.
               </p>
+              {response?.timestamp && (
+                <p
+                  style={{
+                    fontSize: "0.8rem",
+                    color: "#5a7a96",
+                    marginBottom: "1.5rem",
+                  }}
+                >
+                  Submission ID: {response.timestamp}<br />
+                  Message length: {response?.submission?.message_length} characters
+                </p>
+              )}
               <button
                 onClick={() => {
                   setSubmitted(false);
                   setForm({ name: "", email: "", message: "" });
+                  setResponse(null);
                 }}
                 style={{
                   padding: "0.6rem 1.25rem",
@@ -430,8 +465,23 @@ export default function Contact() {
                     (e.currentTarget.style.background = "#4da8da")
                   }
                 >
-                  Send message →
+                  {submitting ? "Sending..." : "Send message →"}
                 </button>
+                {error && (
+                  <p
+                    style={{
+                      fontSize: "0.85rem",
+                      color: "#f87171",
+                      marginTop: "0.5rem",
+                      padding: "0.5rem 0.75rem",
+                      background: "rgba(248, 113, 113, 0.1)",
+                      border: "1px solid rgba(248, 113, 113, 0.3)",
+                      borderRadius: "6px",
+                    }}
+                  >
+                    {error}
+                  </p>
+                )}
               </div>
             </form>
           )}
