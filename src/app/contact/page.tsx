@@ -156,7 +156,7 @@ export default function Contact() {
               ✉ mahmoudabdelkreambusiness@gmail.com
             </a>
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/mahmoud-abd-elkream/"
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -179,7 +179,7 @@ export default function Contact() {
               in LinkedIn
             </a>
             <a
-              href="https://github.com"
+              href="https://github.com/Mahmoud-ABDALKream"
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -200,6 +200,50 @@ export default function Contact() {
               }
             >
               ⌥ GitHub
+            </a>
+            <a
+              href="https://github.com/Mahmoud-ABDALKream/portfolio/blob/main/README.md"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                color: "#e8f0f8",
+                textDecoration: "none",
+                padding: "0.6rem 0.85rem",
+                background: "rgba(77, 168, 218, 0.08)",
+                border: "1px solid rgba(77, 168, 218, 0.25)",
+                borderRadius: "6px",
+                transition: "border-color 0.15s",
+              }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.borderColor = "#4da8da")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.borderColor =
+                  "rgba(77, 168, 218, 0.25)")
+              }
+            >
+              ⬇ Download CV (PDF)
+            </a>
+            <a
+              href="mailto:mahmoudabdelkreambusiness@gmail.com?subject=Book%20a%20call&body=Hi%20Mahmoud%2C%20I%27d%20like%20to%20book%20a%20call%20to%20discuss..."
+              style={{
+                color: "#e8f0f8",
+                textDecoration: "none",
+                padding: "0.6rem 0.85rem",
+                background: "rgba(77, 168, 218, 0.08)",
+                border: "1px solid rgba(77, 168, 218, 0.25)",
+                borderRadius: "6px",
+                transition: "border-color 0.15s",
+              }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.borderColor = "#4da8da")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.borderColor =
+                  "rgba(77, 168, 218, 0.25)")
+              }
+            >
+              📅 Book a call
             </a>
           </div>
         </div>

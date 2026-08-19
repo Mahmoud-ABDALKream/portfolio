@@ -116,7 +116,7 @@ export default function RootLayout({
                 mahmoudabdelkreambusiness@gmail.com
               </a>
               <a
-                href="https://github.com"
+                href="https://github.com/Mahmoud-ABDALKream"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ color: "#7a9bb8", textDecoration: "none" }}
@@ -124,7 +124,7 @@ export default function RootLayout({
                 GitHub
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/mahmoud-abd-elkream/"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ color: "#7a9bb8", textDecoration: "none" }}
