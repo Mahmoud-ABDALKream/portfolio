@@ -391,6 +391,53 @@ export default function MedoniqCase() {
           is role-based (parent vs. child vs. doctor).
         </p>
 
+        {/* Tech stack badges — proves 'shipped React' */}
+        <div
+          style={{
+            display: "flex",
+            gap: "0.5rem",
+            flexWrap: "wrap",
+            marginBottom: "1.5rem",
+          }}
+        >
+          {["React", "Node.js", "REST API", "Figma", "TypeScript", "JWT auth", "Encrypted at rest"].map((t) => (
+            <span
+              key={t}
+              style={{
+                fontSize: "0.75rem",
+                color: "#4da8da",
+                border: "1px solid rgba(77, 168, 218, 0.45)",
+                padding: "0.3rem 0.7rem",
+                borderRadius: "999px",
+                background: "rgba(77, 168, 218, 0.05)",
+              }}
+            >
+              {t}
+            </span>
+          ))}
+        </div>
+
+        {/* GitHub repo link — proves the code exists */}
+        <a
+          href="https://github.com/Mahmoud-ABDALKream/portfolio"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            display: "inline-block",
+            padding: "0.6rem 1.2rem",
+            background: "rgba(77, 168, 218, 0.1)",
+            border: "1px solid #4da8da",
+            borderRadius: "6px",
+            color: "#4da8da",
+            fontSize: "0.9rem",
+            fontWeight: 600,
+            textDecoration: "none",
+            marginBottom: "1.5rem",
+          }}
+        >
+          View source code on GitHub &rarr;
+        </a>
+
         {/* Engineering image */}
         <div
           style={{
