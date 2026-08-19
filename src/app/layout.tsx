@@ -4,6 +4,7 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import Link from "next/link";
 import { SiteNav } from "@/components/site-nav";
+import { Analytics } from "@vercel/analytics/react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -164,6 +165,47 @@ export default function RootLayout({
                 LinkedIn
               </a>
             </div>
+            {/* FlyRank Graduate Badge */}
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "0.5rem",
+              }}
+            >
+              <a
+                href="https://aifluency.flyrank.ai"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.4rem",
+                  padding: "0.4rem 0.85rem",
+                  background: "rgba(77, 168, 218, 0.12)",
+                  border: "1px solid rgba(77, 168, 218, 0.4)",
+                  borderRadius: "6px",
+                  fontSize: "0.78rem",
+                  color: "#4da8da",
+                  fontWeight: 600,
+                  textDecoration: "none",
+                  letterSpacing: "0.05em",
+                }}
+              >
+                <span style={{ fontSize: "0.9rem" }}>&#x1F39F;</span>
+                FlyRank Graduate
+              </a>
+              <p
+                style={{
+                  fontSize: "0.7rem",
+                  color: "#5a7a96",
+                  textAlign: "center",
+                }}
+              >
+                AI Fluency Program
+              </p>
+            </div>
           </div>
           <p
             style={{
@@ -178,6 +220,7 @@ export default function RootLayout({
             CSS · Alexandria, Egypt
           </p>
         </footer>
+        <Analytics />
         <Toaster />
       </body>
     </html>
