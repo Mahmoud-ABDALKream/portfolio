@@ -30,6 +30,20 @@ export async function POST(request: Request) {
       );
     }
 
+    // 2.5. Max length validation (prevent abuse)
+    const MAX_NAME = 100;
+    const MAX_EMAIL = 100;
+    const MAX_MESSAGE = 2000;
+    if (name.length > MAX_NAME || email.length > MAX_EMAIL || message.length > MAX_MESSAGE) {
+      return NextResponse.json(
+        {
+          ok: false,
+          error: `Input too long. Max: name ${MAX_NAME}, email ${MAX_EMAIL}, message ${MAX_MESSAGE} characters.`,
+        },
+        { status: 400 }
+      );
+    }
+
     // 3. Validate email format (basic check)
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
@@ -37,26 +51,30 @@ export async function POST(request: Request) {
         {
           ok: false,
           error: "Invalid email format. Please provide a valid email address.",
-          received_email: email,
         },
         { status: 400 }
       );
     }
 
-    // 4. Construct a mailto link so the submission can be forwarded
-    const mailtoLink = `mailto:mahmoudabdelkreambusiness@gmail.com?subject=Portfolio%20Contact%3A%20${encodeURIComponent(name)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+    // 3.5. Sanitize input — strip HTML tags to prevent XSS in response
+    const sanitize = (str: string) => str.replace(/<[^>]*>/g, "").trim();
+    const cleanName = sanitize(name);
+    const cleanEmail = sanitize(email);
+    const cleanMessage = sanitize(message);
 
-    // 5. Return the structured response
-    // In production, you'd also send an email or save to DB here.
+    // 4. Construct a mailto link so the submission can be forwarded
+    const mailtoLink = `mailto:mahmoudabdelkreambusiness@gmail.com?subject=Portfolio%20Contact%3A%20${encodeURIComponent(cleanName)}&body=${encodeURIComponent(`Name: ${cleanName}\nEmail: ${cleanEmail}\n\nMessage:\n${cleanMessage}`)}`;
+
+    // 5. Return the structured response (sanitized data only)
     return NextResponse.json({
       ok: true,
       message: "Submission received successfully.",
       timestamp: new Date().toISOString(),
       submission: {
-        name,
-        email,
-        message,
-        message_length: message.length,
+        name: cleanName,
+        email: cleanEmail,
+        message: cleanMessage,
+        message_length: cleanMessage.length,
       },
       next_step: "Forward to email or save to database (production setup).",
       mailto_forward: mailtoLink,

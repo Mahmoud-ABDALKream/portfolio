@@ -28,13 +28,45 @@ export const metadata: Metadata = {
     "Portfolio",
     "Healthcare",
     "E-commerce",
+    "Alexandria",
+    "Egypt",
   ],
   authors: [{ name: "Mahmoud ABD ELKream" }],
+  icons: {
+    icon: "/favicon.svg",
+  },
+  metadataBase: new URL("https://mahmoud-ahmed-abdelkream.vercel.app"),
   openGraph: {
     title: "Mahmoud ABD ELKream — Portfolio",
     description:
-      "From Figma to shipped React — award-winning product design for healthcare and e-commerce.",
+      "From Figma to shipped React — award-winning product design for healthcare and e-commerce. iSchool 1st Place 2025, IEEE YESIST international finalist.",
     type: "website",
+    url: "https://mahmoud-ahmed-abdelkream.vercel.app",
+    siteName: "Mahmoud ABD ELKream — Portfolio",
+    images: [
+      {
+        url: "/images/portfolio-mockup-laptop 3.png",
+        width: 1200,
+        height: 630,
+        alt: "Medoniq — Digital Healthcare Platform by Mahmoud ABD ELKream",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Mahmoud ABD ELKream — Portfolio",
+    description:
+      "From Figma to shipped React — award-winning product design for healthcare and e-commerce.",
+    images: ["/images/portfolio-mockup-laptop 3.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+    },
   },
 };
 
